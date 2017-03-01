@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+	<link rel="icon" href="../assets/img/favicon.ico">	
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>Data - Melbourne Train Station Carparks Project</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+	
+    <link href="../bootstrap3/css/bootstrap.css" rel="stylesheet" />
+	<link href="../assets/css/gsdk.css" rel="stylesheet" />  
+    <link href="../assets/css/demo.css" rel="stylesheet" /> 
+    
+    <!--     Font Awesome     -->
+    <link href="../bootstrap3/css/font-awesome.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div id="navbar-full">
+    <div class="container">
+        <nav class="navbar navbar-ct-blue navbar-fixed-top" role="navigation">
+          
+          <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="https://philam.github.io">
+                     <div class="logo-container">
+                        <div class="logo">
+                            <img src="../assets/img/new_logo.png">
+                        </div>
+                        <div class="brand">
+                            Philip M
+                        </div>
+                    </div>
+                </a>
+            </div>
+        
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right">
+                    <li><a href="../">Map</a></li>
+					<li><a href="../info">Information</a></li>
+					<li><a href="../data">Data</a></li>
+                    <li><a href="https://github.com/philam/trainstationcarparks/" class="btn btn-round btn-default">View on GitHub</a></li>
+               </ul>
+              
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
+    </div><!--  end container-->
+    
+    <div class='blurred-container'>
+        <div class="motto">
+            <div>Melbourne</div>
+	        <div>Station</div>
+            <div>Carparks</div>
+        </div>
+        <div class="img-src" style="background-image: url('../assets/img/station_carpark.jpg')"></div>
+        <div class='img-src blur' style="background-image: url('../assets/img/station_carpark_blue.jpg')"></div>
+    </div>
+    
+</div>     
+    
+
+
+<div class="main">
+    <div class="container tim-container">
+       
+        <div class="tim-title">
+            <h2>Project Data</h2>
+        </div>
+		
+		<div class="container text-left">
+			<h3>Process</h3>
+			<p>I took the data for this map from the <a href="https://data.vic.gov.au">Victorian Government's Open Data Portal</a>.</p> 
+			<p>This was the <a href="https://www.data.vic.gov.au/data/dataset/ptv-train-station">PTV Train Station dataset</a> (containing the geometry and other station features) and the <a href="https://www.data.vic.gov.au/data/dataset/ptv-train-station-car-park">PTV Train Station Car Park</a> dataset (containing the number of car parking spots per railway station).</p>
+			<p>I then used QGIS to create points from the polygons contained in the original datasets and put this into a new .csv file which was then converted to a .geojson file for uploading to Mapbox.</p>
+			
+			<h4>Issues</h4>
+			<p>The first issue I encountered was that each station had multiple carparks and each one had its own field in the dataset. For instance, Laverton has four separate carparks, but they all serve the station and are all labelled 'LAVERTON'.</p>
+			<p>To solve this issue, I use the VLOOKUP tool in Excel to combine the data to create a point
+			<p>The other main problem was that many railway stations were not included in the car parking dataset because they have no station carparking, creating an issue with cross-referencing the data to each station's name and location coordinates.</p>
+			<p>In the absence of an easy programming solution (any suggestions are welcome by the way), I manually transferred over each station's X and Y coordinates into the new carparking dataset.</p>
+			<p>The result of this process is the data that the <a href="../">map</a> runs on. You can access and download this data in the 'Aggregated data' link below.</p>
+		</div>
+	
+		<div class="container text-left">
+			<h3>Datasets</h3>
+			<h4>Raw data</h4>
+			<p>	
+				<ul>
+				<li><a href="https://www.data.vic.gov.au/data/dataset/ptv-train-station">PTV Train Station dataset</a></li>
+				<li><a href="https://www.data.vic.gov.au/data/dataset/ptv-train-station-car-park">PTV Train Station Car Park</a></li>
+				</ul>
+			</p>
+			<h4>Aggregated data</h4>
+			<p>	
+				<ul>
+				<li><a href="./Train station carparks points aggregated.csv">CSV file of train station carparks</a></li>
+				<li><a href="./Train station carparks points aggregated.geojson">GEOJSON file of train station carparks</a></li>
+				</ul>
+			</p>
+		</div>
+	</div>
+</html>
