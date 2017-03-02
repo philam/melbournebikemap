@@ -6,68 +6,33 @@
 	<link rel="icon" href="assets/img/favicon.ico">	
 	
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title>Melbourne Train Station Carparks Project</title>
+	<title>Melbourne Bicycle Network Map</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 	
-	<script src='https://api.mapbox.com/mapbox-gl-js/v0.25.1/mapbox-gl.js'></script>
-    <link href="bootstrap3/css/bootstrap.css" rel="stylesheet" />
-	<link href="assets/css/gsdk.css" rel="stylesheet" />  
-    <link href="assets/css/demo.css" rel="stylesheet" /> 
+	<link rel="stylesheet" href="assets/css/ol.css" />
+    <link rel="stylesheet" href="bootstrap3/css/bootstrap.css"  />
+	<link rel="stylesheet" href="assets/css/gsdk.css" />  
+    <link rel="stylesheet" href="assets/css/demo.css" /> 
     
     <!--     Font Awesome     -->
     <link href="bootstrap3/css/font-awesome.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
-	
-	<!--     Mapbox           -->
-	<link href='https://api.mapbox.com/mapbox-gl-js/v0.25.1/mapbox-gl.css' rel='stylesheet' />
-    <link href='https://www.mapbox.com/base/latest/base.css' rel='stylesheet' />
+
     <style>
-    #map {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
+    .map {
+      height: 100px;
+      width: 100%;
     }
-    
-    #locations {
-        position: absolute;
-    }
-.legend {
-    background-color: #fff;
-    border-radius: 3px;
-    bottom: 30px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.10);
-    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-    padding: 10px;
-    position: absolute;
-    right: 10px;
-    z-index: 1;
-}
-.legend h4 {
-    margin: 0 0 10px;
-}
-.legend div span {
-    border-radius: 50%;
-    display: inline-block;
-    height: 10px;
-    margin-right: 5px;
-    width: 10px;
-}
-.mapboxgl-popup {
-    max-width: 400px;
-    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-}
-    </style>
+	</style>
+	<script src="https://openlayers.org/en/v4.0.1/build/ol.js" type="text/javascript"></script>
 </head>
 	
 <body>
 <div id="navbar-full">
     <div class="container">
-        <nav class="navbar navbar-ct-blue navbar-transparent navbar-fixed-top" role="navigation">
-          
+        <nav class="navbar navbar-ct-blue navbar-fixed-top" role="navigation">
           <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -83,7 +48,7 @@
                             <img src="assets/img/new_logo.png">
                         </div>
                         <div class="brand">
-                            Philip M
+                            Philip Mallis
                         </div>
                     </div>
                 </a>
@@ -95,7 +60,7 @@
                     <li><a href="">Map</a></li>
 					<li><a href="info">Information</a></li>
 					<li><a href="data">Data</a></li>
-                    <li><a href="https://github.com/philam/trainstationcarparks/" class="btn btn-round btn-default">View on GitHub</a></li>
+                    <li><a href="https://github.com/philam/melbournebikemap" class="btn btn-round btn-default">View on GitHub</a></li>
                </ul>
               
             </div><!-- /.navbar-collapse -->
@@ -104,123 +69,37 @@
     </div><!--  end container-->
 </div>
 
-    <div id='map'></div>
+<div id='map'></div>
     <script>
-    mapboxgl.accessToken = 'pk.eyJ1IjoicGhpbGFtIiwiYSI6ImNpbmk1OGI1MDB3dmt1a20zeDZ5ejRnemsifQ.jfEJAMTg8tCqE2KI2tuAzQ';
-    //Load a new map in the 'map' HTML div
-    var map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/mapbox/dark-v9',
-            center: [145.034, -37.798],
-            zoom: 11
-        });
-    //Load the vector tile source
-    map.on('load', function () {
-            map.addSource('stationcarparks', {
-                type: 'vector',
-                url: 'mapbox://philam.civhymt7h020n2oqimw4v82lg-2jduz',
-            });
-    
-// Store an array of circle-colour ramps for data-driven styles
-var colorList = [
-    [0, '#66bd63'],
-    [1, '#a6d96a'],
-    [50, '#d9ef8b'],
-    [100, '#ffffbf'],
-    [200, '#fee08b'],
-    [400, '#fdae61'],
-    [600, '#f46d43'],
-    [800, '#d73027'],
-  ];
-//Add the circle layer to the map
-map.addLayer({
-    'id': 'station_carparks',
-    'source': 'stationcarparks', //name of source
-    'source-layer': 'Train_station_carparks_points_ag', //name of tileset
-    'type': 'circle',
-    'paint' : {
-        //Add data-driven styles for circle-color
-        'circle-color' : {
-                    property: 'COM_CAPAC',
-                    type: 'interval',
-                    stops: colorList,
-        },
-        //Add data-driven styles for circle radius
-        'circle-radius': {
-    property: 'COM_CAPAC',
-    type: 'exponential',
-    stops: [
-            [{ "zoom": 15, "value": 0 }, 0],
-            [{ "zoom": 17, "value": 0 }, 0],
-            [{ "zoom": 20, "value": 0 }, 0],
-            [{ "zoom": 15, "value": 1 }, 5],
-            [{ "zoom": 17, "value": 1 }, 10],
-            [{ "zoom": 20, "value": 1 }, 20],
-            [{ "zoom": 15, "value": 50 }, 8],
-            [{ "zoom": 17, "value": 50 }, 16],
-            [{ "zoom": 20, "value": 50 }, 24],
-            [{ "zoom": 15, "value": 100 }, 12],
-            [{ "zoom": 17, "value": 100 }, 18],
-            [{ "zoom": 20, "value": 100 }, 24],
-            [{ "zoom": 15, "value": 200 }, 18],
-            [{ "zoom": 17, "value": 200 }, 26],
-            [{ "zoom": 20, "value": 200 }, 35],
-            [{ "zoom": 15, "value": 400 }, 26],
-            [{ "zoom": 17, "value": 400 }, 36],
-            [{ "zoom": 20, "value": 400 }, 46],
-            [{ "zoom": 15, "value": 600 }, 40],
-            [{ "zoom": 17, "value": 600 }, 50],
-            [{ "zoom": 20, "value": 600 }, 60],
-            [{ "zoom": 15, "value": 800 }, 50],
-            [{ "zoom": 17, "value": 800 }, 60],
-            [{ "zoom": 20, "value": 800 }, 70]
-    ]
-},
-        'circle-opacity': 0.6
-        }
-    });
-});
-// Add zoom and rotation controls to the map.
-map.addControl(new mapboxgl.Navigation({position: 'top-left'}));
-// When a click event occurs near a place, open a popup at the location of
-// the feature, with HTML description from its properties
-map.on('click', function(e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['station_carparks'] });
-    // if the features have no info, return nothing
-    if (!features.length) {
-        return;
-    }
-    var feature = features[0];
-    // Populate the popup and set its coordinates
-    // based on the feature found
-    var popup = new mapboxgl.Popup()
-        .setLngLat(feature.geometry.coordinates)
-        .setHTML('<div id="popup" class="popup" style="z-index: 10;"> <h5> Detail: </h5>' +
-            '<ul class="list-group">' +
-            '<li class="list-group-item"> Station Name: ' + feature.properties['STATION'] + " </li>" +
-            '<li class="list-group-item"> Carpark Capacity: ' + feature.properties['COM_CAPAC'] + " </li>" + '</ul> </div>')
-        .addTo(map);
-});
-// Use the same approach as above to indicate that the symbols are clickable
-// by changing the cursor style to 'pointer'
-map.on('mousemove', function(e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['station_carparks'] });
-    map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
-});
-        </script>
+      var extent = [0, 0, 1472, 1222];
+      var projection = new ol.proj.Projection({
+        code: 'bicycle-map',
+        units: 'pixels',
+        extent: extent
+      });
 
-<!-- add html elements to the legend !-->
-<div id='legend' class='legend'>
-    <h4>Melbourne Metropolitan Train Station Carpark Capacity</h4>
-    <div><span style='background-color: #a6d96a'></span>1-50</div>
-    <div><span style='background-color: #d9ef8b'></span>50-100</div>
-    <div><span style='background-color: #ffffbf'></span>100-200</div>
-    <div><span style='background-color: #fee08b'></span>200-400</div>
-    <div><span style='background-color: #fdae61'></span>400-600</div>
-    <div><span style='background-color: #f46d43'></span>600-800</div>
-    <div><span style='background-color: #d73027'></span>800+</div>
-    <div>Data Copyright © The State of Victoria, <a href="http://ptv.vic.gov.au">Public Transport Victoria</a> 2016</div>
-  </div>
+      var map = new ol.Map({
+        layers: [
+          new ol.layer.Image({
+            source: new ol.source.ImageStatic({
+              attributions: 'This page uses <a href="http://openlayers.org">OpenLayers</a>, licensed under <a href="https://tldrlegal.com/license/bsd-2-clause-license-(freebsd)">2-Clause BSD</a>. Map licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0 </a> Please don&#8217;t steal :)',
+              url: 'assets/img/bikemap_web_small.png',
+              projection: projection,
+              imageExtent: extent
+            })
+          })
+        ],
+        target: 'map',
+        view: new ol.View({
+          projection: projection,
+          center: ol.extent.getCenter(extent),
+          zoom: 2,
+          maxZoom: 6
+        })
+      });
+	</script>
+</div>
+
 </body>
 
 </html>

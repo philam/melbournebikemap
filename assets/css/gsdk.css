@@ -748,7 +748,8 @@ input.ct-red + span + label + span.switch-right {
   border-radius: 0;
   color: #FFFFFF;
   padding: 10px 15px;
-  font-size: 14px; }
+  font-size: 14px;
+  text-align: center }
   .container .alert {
     border-radius: 4px; }
   .navbar .alert {
@@ -2007,3 +2008,7 @@ input.ct-red + span + label + span.switch-right {
 
   .btn.dropdown-toggle {
     margin-bottom: 0; } }
+	
+  .map {
+	  padding-top:100px;
+  }
