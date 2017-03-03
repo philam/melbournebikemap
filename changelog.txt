@@ -1,0 +1,20 @@
+v1.0 - 2 March 2017
+* First public release
+
+V1.0.1 - 4 March 2017
+
+Map improvements
+* Relabelled Taylors Creek Trail to TC
+* Relabelled Tarralla Creek Trail to Tarralla
+* Removed watermark
+
+Map fixes
+* Added Taylors Creek Trail to index
+* Added Box Hill - Ringwood Trail to index
+* Added Eastlink Trail to index
+* Added Footscray Road Trail to index
+* Added Stud Road Trail to index
+* Added second Western Ring Road Trail icon at eastern end
+* Fixed Werribee River Trail abbreviation in index to align with trail icon
+* Changed Stud Road Trail label to SU
+* Enlarged index to fit new labels
