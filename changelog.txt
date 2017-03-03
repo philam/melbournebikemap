@@ -18,3 +18,6 @@ Map fixes
 * Fixed Werribee River Trail abbreviation in index to align with trail icon
 * Changed Stud Road Trail label to SU
 * Enlarged index to fit new labels
+
+Website fixes
+* Fixed script path error in ../info/index.html and ../data/index.html to solve mobile nav menu loading error
