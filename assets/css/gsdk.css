@@ -70,7 +70,8 @@ body {
 
 .main {
   background-color: #FFFFFF;
-  position: relative; }
+  position: relative; 
+  height: auto; }
 
 a {
   color: #2CA8FF; }

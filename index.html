@@ -9,7 +9,7 @@
 	<title>Melbourne Bicycle Network Map</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<link rel="stylesheet" href="assets/css/ol.css" />
     <link rel="stylesheet" href="bootstrap3/css/bootstrap.css"  />
@@ -26,8 +26,8 @@
     .map {
       height: 100%;
       width: 100%;
-	  position: fixed;
     }
+	
 	</style>
 </head>
 	
@@ -71,9 +71,9 @@
     </div><!--  end container-->
 </div>
 
-<div class="main">
+<div>
 <div id="map">
-	<div class="container">
+	<div class="container-fluid">
     <script>
       var extent = [0, 0, 1472, 1222];
       var projection = new ol.proj.Projection({
@@ -106,8 +106,6 @@
 </div>
 </div>
 
-</body>
-
 <script src="jquery/jquery-1.10.2.js" type="text/javascript"></script>
 <script src="assets/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
 
@@ -119,5 +117,7 @@
 <script src="assets/js/presentation-page/jquery.sharrre.js"></script>
 <script src="assets/js/demo.js"></script>
 <script src="assets/js/custom.js"></script>
+
+</body>
 
 </html>
