@@ -31,3 +31,6 @@ Map improvements
 
 Map fixes
 * Lengthened Stud Road Trail further south
+
+Website fixes
+* Updated favicon from parking website to actual bicycle
