@@ -22,7 +22,7 @@ Map fixes
 Website fixes
 * Fixed script path error in ../info/index.html and ../data/index.html to solve mobile nav menu loading error
 
-V1.0.2 - <DATE HERE> March 2017
+V1.0.2 - 8 March 2017
 
 Map improvements
 * Added gap in Anniversary Trail at Riversdale Park
