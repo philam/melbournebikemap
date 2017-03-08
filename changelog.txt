@@ -21,3 +21,13 @@ Map fixes
 
 Website fixes
 * Fixed script path error in ../info/index.html and ../data/index.html to solve mobile nav menu loading error
+
+V1.0.2 - <DATE HERE> March 2017
+
+Map improvements
+* Added gap in Anniversary Trail at Riversdale Park
+* Added gap in Waverley Rail Trail at Jordanville Station
+* Added gaps in Stud Road Trail
+
+Map fixes
+* Lengthened Stud Road Trail further south
